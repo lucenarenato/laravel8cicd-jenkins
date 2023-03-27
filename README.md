@@ -4,4 +4,4 @@ A very basic Laravel 8 application used to be combined with Jenkins and Docker t
 
 > Leia um livro chamado “Continuous Delivery with Docker and Jenkins — Second edition” de Rafal LESZKO.
 
-[More info here](http://blog.renatolucena.net/)
+[More info here](https://blog.renatolucena.net/post/laravel-ci-cd-jenkins-github)

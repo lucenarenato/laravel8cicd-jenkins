@@ -950,3 +950,8 @@ Lembre-se que este exemplo é muito básico e há coisas importantes a considera
 Resumo
 
 > Concluímos uma introdução prática ao CI/CD com Jenkins, Docker, Ansible e com base em projetos Laravel 8. Espero que tenham gostado desta história e adquirido algum conhecimento. Se você tiver alguma dúvida ou sugestão, deixe-a na seção de comentários.
+
+## Fonte:
+- https://blog.renatolucena.net/post/laravel-ci-cd-jenkins-github
+- https://faun.pub/configure-laravel-8-for-ci-cd-with-jenkins-and-github-part-1-58b9be304292
+- https://faun.pub/configure-laravel-8-for-ci-cd-with-jenkins-and-github-part-2-80d9c337f0e4
