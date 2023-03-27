@@ -1,4 +1,6 @@
-0. Introdução aos conceitos
+# Configurar Laravel 8 para CI/CD com Jenkins e GitHub
+
+## 0. Introdução aos conceitos
 
 Docker
 
@@ -44,7 +46,7 @@ Acceptance Testing
 
 O Teste de Aceitação serve para avaliar se o Produto está funcionando para o usuário, corretamente para o uso.
 
-1. Installing Docker on AWS EC2
+## 1. Installing Docker on AWS EC2
 
 Utilizo o Amazon AWS EC2 para criar máquinas virtuais / instâncias EC2 (VMs). Criei uma instância EC2 muito simples com as características seguintes:
 
@@ -61,7 +63,7 @@ sudo service docker start
 sudo usermod -a -G docker ec2-user
 ```
 
-2. Installing Jenkins through Docker
+## 2. Installing Jenkins through Docker
 
 > Então, tive que criar um container para fazer o deploy do Jenkins. Na primeira vez, criei um contêiner simples com o comando docker run -d -p 49001:8080 -p 50000:50000 -v $HOME/jenkins_home:/var/jenkins_home -- name jenkins jenkins/jenkins (NÃO use este comando, este é apenas um exemplo). E comecei a usar Jenkins.
 
@@ -113,7 +115,7 @@ Em seguida, abri minha instância do AWS EC2 no navegador (Acessando a porta 490
 
 Instalei os plugins recomendados e instalei outro plugin chamado “GitHub integration”
 
-3. A new Jenkins Item
+## 3. A new Jenkins Item
 
 Antes de criar um novo artigo Jenkins, desenhei uma aplicação Laravel 8 muito básica, que pode ser encontrada aqui: https://github.com/lucenarenato/laravel8cicd-jenkins
 
@@ -129,7 +131,7 @@ Pipeline Laravel
 
 <p align="center"><img src="public/img/2.webp" width="600"></p>
 
-4. Executando testes de unidade
+## 4. Executando testes de unidade
 
 Para executar testes de unidade/recurso automaticamente, crio um teste simples em meu projeto Laravel. Esse teste pode ser encontrado aqui: /test/Feature/RouteTest.php
 
@@ -185,7 +187,7 @@ O código anterior compila o projeto e executa o comando “PHP craftstest” qu
 
 Eu construo o item Laravel (do Jenkins), e ele me mostra uma mensagem dizendo que passou nas etapas “Declarative: Checkout SCM, Build, Unit test”. Jó marcou tudo em verde.
 
-5. Versão aprimorada com credenciais do Jenkins
+## 5. Versão aprimorada com credenciais do Jenkins
 
 O pipeline anterior não alterou as variáveis ​​.env (nome de usuário do banco de dados, senha, host). Então, usei as credenciais do Jenkins (do painel de administração do Jenkins) e criei quatro credenciais. Mais informações aqui: https://www.jenkins.io/doc/book/using/using-credentials/
 
@@ -227,7 +229,7 @@ pipeline {
     }
 ```
 
-6. Executando o teste de cobertura de código
+## 6. Executando o teste de cobertura de código
 
 Executar o teste de cobertura de código foi muito simples, PHPUnit já suporta teste de cobertura de código. Atualizei o pipeline do Jenkins e incluí uma nova etapa:
 
@@ -243,7 +245,7 @@ Eu construo o item Laravel (do Jenkins), e ele me mostra uma mensagem dizendo qu
 
 O relatório de cobertura de código foi encontrado em uma rota como esta: http://EC2DNS.compute-1.amazonaws.com:49001/job/Laravel/21/execution/node/3/ws/reports/coverage/dashboard.html ( você pode navegar a partir do espaço de trabalho do seu trabalho). Esse relatório mostrou algumas aulas sem testes (0%) e outras com (80%, 50% cobertos). Não implementei um mínimo de restrição de cobertura de código, mas é uma boa ideia definir um mínimo.
 
-7. Análise de código estático
+## 7. Análise de código estático
 
 Para executar a análise de código estático, instalei dois pacotes no meu projeto Laravel:
 
@@ -436,7 +438,7 @@ Vou apresentar como finalizar o processo de CI/CD (com base em alguns elementos 
 
 <p align="center"><img src="public/img/3.webp" width="600"></p>
 
-0. Introdução de novos conceitos
+## 0. Introdução de novos conceitos
 
 Ansible é a maneira mais simples de automatizar aplicativos e infraestrutura de TI. Implantação de aplicativos + gerenciamento de configuração + entrega contínua.
 
@@ -467,7 +469,7 @@ Criei as duas instâncias anteriores com base nas seguintes características:
 
 <p align="center"><img src="public/img/4.webp" width="600"></p>
 
-1. Configurando a instância do Jenkins
+## 1. Configurando a instância do Jenkins
 Eu instalei o Docker nessa instância:
 
 ```sh
@@ -622,7 +624,7 @@ MIIE…
 -----END RSA PRIVATE KEY-----
 ```
 
-2. Criando os playbooks do Ansible
+## 2. Criando os playbooks do Ansible
 
 Trabalhar com os ambientes de preparação e production requer comunicação entre o contêiner Jenkins e os ambientes anteriores. Por exemplo: (i) implantar a nova versão no ambiente de preparação (para aplicar os testes de aceitação), ou (ii) implantar o produto lançado no ambiente de production.
 
@@ -789,7 +791,7 @@ Eu coloco o próximo conteúdo (verifique se ele executa o teste de aceitação 
 
 Neste caso, os testes de aceitação e os testes de fumaça são os mesmos. No entanto, comumente, os testes de fumaça são um subconjunto dos testes de aceitação.
 
-3. Canalização completa
+## 3. Canalização completa
 
 Desenvolvi um novo projeto GitHub sobre essa história. Esse projeto GitHub pode ser encontrado aqui: https://github.com/cpdrenato/laravel8cicd-jenkins
 
@@ -920,7 +922,7 @@ Existem algumas diferenças entre este pipeline e o pipeline apresentado na part
 - “Release”: implanta a nova versão do projeto dentro do ambiente de produção.
 - “Smoke test”: executa os testes de fumaça sobre o container dentro do ambiente de produção.
 
-4. Item de Jenkins
+## 4. Item de Jenkins
 
 Eu crio um novo item jenkins (chamado “laravel8cicd-jenkins”), conectei-o ao meu repo: https://github.com/cpdrenato/laravel8cicd-jenkins e construí um novo job. A Figura 3 mostra os resultados.
 
@@ -935,7 +937,7 @@ Também apliquei uma mudança no projeto laravel. Modifiquei o texto da página 
 
 <p align="center"><img src="public/img/7.webp" width="600"></p>
 
-5. Notas importantes
+## 5. Notas importantes
 
 Lembre-se que este exemplo é muito básico e há coisas importantes a considerar:
 
